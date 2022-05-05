@@ -5,15 +5,16 @@
     <title>BookList</title>
 </head>
 <body>
-<a href="/create-book">Create new book</a>
+<a href="/createBook">Create new book</a>
 <h1>Book</h1>
-<table>
+<table border="1">
     <tr>
         <th>Name</th>
         <th>Author</th>
         <th>Price</th>
         <th>Category</th>
         <th>Image</th>
+        <th colspan="2">Action</th>
     </tr>
     <th:block th:each="book : ${books}">
         <tr>
@@ -24,8 +25,8 @@
             <td>
                 <img th:src="@{'/img/'+${book.image}}" width="100">
             </td>
-            <td><a th:href="@{/edit-book/__${book.id}__ }">Edit</a></td>
-            <td><a th:href="@{/delete-book/__${book.id}__ }">Delete</a></td>
+            <td><a th:href="@{/editBook/__${book.id}__ }">Edit</a></td>
+            <td><a th:href="@{/deleteBook/__${book.id}__ }">Delete</a></td>
         </tr>
     </th:block>
 </table>

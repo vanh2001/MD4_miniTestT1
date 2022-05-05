@@ -11,11 +11,13 @@ public class Book {
     private String name;
     private int price;
     private String author;
+    private String image;
+
     @ManyToOne(targetEntity = Category.class)
     @JoinColumn(name = "category_id")
     private Category category;
 
-    private String image;
+
 
     public String getImage() {
         return image;

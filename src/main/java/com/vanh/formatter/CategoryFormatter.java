@@ -1,5 +1,6 @@
 package com.vanh.formatter;
 
+import com.vanh.exception.BookNotFound;
 import com.vanh.model.Category;
 import com.vanh.service.category.ICategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,12 @@ public class CategoryFormatter implements Formatter<Category> {
 
     @Override
     public Category parse(String text, Locale locale) throws ParseException {
-        Optional<Category> categoryOptional = categoryService.findById(Long.parseLong(text));
+        Optional<Category> categoryOptional = null;
+        try {
+            categoryOptional = categoryService.findById(Long.parseLong(text));
+        } catch (BookNotFound e) {
+            e.printStackTrace();
+        }
         return categoryOptional.orElse(null);
     }
 

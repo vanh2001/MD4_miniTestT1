@@ -1,5 +1,6 @@
 package com.vanh.service.book;
 
+import com.vanh.exception.BookNotFound;
 import com.vanh.model.Book;
 import com.vanh.repo.IBookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +19,12 @@ public class BookService implements IBookService {
     }
 
     @Override
-    public Optional<Book> findById(Long id) {
-        return bookRepository.findById(id);
+    public Optional<Book> findById(Long id) throws BookNotFound {
+        Optional<Book> book = bookRepository.findById(id);
+        if (book.isPresent()){
+            return book;
+        }
+        throw new BookNotFound();
     }
 
     @Override
